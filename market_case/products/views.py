@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 
 from .models import Products
@@ -29,3 +30,10 @@ class ProductListByCategoryAPIView(generics.ListAPIView):
             Q(product_category=category_id) |
             Q(product_subcategory__parent_id=category_id)).select_related()
         return queryset
+
+
+class ProductDetailView(generics.RetrieveAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductSerializer
+
+

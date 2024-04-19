@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-yies_*hppjx3nis&@#4bjd!vj=-bz9el_s1cuf()w0$ufe5yj1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'rest_framework',
     'drf_spectacular',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
