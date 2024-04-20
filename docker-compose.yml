@@ -15,7 +15,7 @@ services:
       - DB_NAME=db_name
       - DB_USER=db_user
       - DB_PASS=123456
-      - EMAIL_BACKEND = django.core.mail.backends.smtp.EmailBackend
+      - EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
       - EMAIL_HOST=smtp.yandex.ru
       - EMAIL_PORT=465
       - EMAIL_HOST_USER=sokrat.mm5@yandex.ru
@@ -38,3 +38,5 @@ services:
       - POSTGRES_DB=db_name
       - POSTGRES_USER=db_user
       - POSTGRES_PASSWORD=123456
+
+
