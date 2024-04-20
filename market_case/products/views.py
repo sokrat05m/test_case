@@ -17,7 +17,7 @@ class ProductsAPIListPagination(PageNumberPagination):
 
 
 class ProductsAPIList(generics.ListAPIView):
-    queryset = Products.objects.all()
+    queryset = Products.objects.all().select_related()
     serializer_class = ProductSerializer
     pagination_class = ProductsAPIListPagination
 
@@ -34,7 +34,7 @@ class ProductListByCategoryAPIView(generics.ListAPIView):
 
 
 class ProductDetailView(generics.RetrieveAPIView):
-    queryset = Products.objects.all()
+    queryset = Products.objects.all().select_related()
     serializer_class = ProductSerializer
 
 
@@ -43,8 +43,7 @@ def get_min_max_sum(request):
     '''
     Операции выполняются по обычной, а не скидочной цене
     '''
-    min_price = Products.objects.aggregate(min=Min('price'))['min']
-    max_price = Products.objects.aggregate(max=Max('price'))['max']
-    balance_sum = Products.objects.aggregate(sum=Sum(F('price') * F('product_balance')))['sum']
+    total = Products.objects.aggregate(min=Min('price'), max=Max('price'),
+                                       sum=Sum(F('price') * F('product_balance')))
 
-    return Response({'min': min_price, 'max': max_price, 'sum': balance_sum})
+    return Response({'min': total['min'], 'max': total['max'], 'sum': total['sum']})

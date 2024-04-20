@@ -6,5 +6,4 @@ app_name = 'payments'
 
 urlpatterns = [
     path('', views.send_mail_test, name='payment'),
-    path('p/', views.te)
 ]

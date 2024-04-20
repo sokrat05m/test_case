@@ -17,9 +17,11 @@ def send_mail_test(request):
     cart = request.user.cart
     email1 = 'ooosokrat@mail.ru'
     url = 'http://test-payments.mediann-dev.ru/payment'
+    query = cart.items.aggregate(sum=Sum(F('quantity') * F('product__discount_price')),
+                                 quantity=Sum('quantity'))
     data = {
-        'amount': cart.items.aggregate(sum=Sum(F('quantity') * F('product__discount_price')))['sum'],
-        'items_qty': cart.items.aggregate(quantity=Sum('quantity'))['quantity'],
+        'amount': query['sum'],
+        'items_qty': query['quantity'],
         'api_token': 'jhgjebgy7w44bfgsfsjgjdgmjuiege',
         'user_email': email1
     }
@@ -40,19 +42,3 @@ def send_mail_test(request):
         'rec': recipient_list},
         status=status.HTTP_200_OK)
 
-
-@api_view()
-def te(request):
-    data = {
-        "amount": 10,
-        "items_qty": 10,
-        "api_token": "jhgjebgy7w44bfgsfsjgjdgmjuiege",
-        "user_email": "string"
-    }
-
-    response = requests.post('http://test-payments.mediann-dev.ru/payment',
-                             json=data)
-    response = response.json()
-    cart = request.user.cart
-    res = cart.items.aggregate(sum=Sum(F('quantity') * F('product__discount_price')))
-    return HttpResponse(f"{cart.items.aggregate(Sum('quantity'))}")

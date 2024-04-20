@@ -23,6 +23,7 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
+    path('silk/', include('silk.urls', namespace='silk')),
     path('admin/', admin.site.urls),
     path('api/v1/', include('products.urls', namespace='products')),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

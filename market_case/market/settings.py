@@ -26,6 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'cart.apps.CartConfig',
-    'payments.apps.PaymentsConfig'
+    'payments.apps.PaymentsConfig',
+    'silk',
+
 ]
 
 MIDDLEWARE = [
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'silk.middleware.SilkyMiddleware'
 ]
 
 ROOT_URLCONF = 'market.urls'
