@@ -1,8 +1,9 @@
-from django.db.models import Q
+from django.db.models import Q, Min, Sum, Max, F
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
 
 from .models import Products
 from .serializers import ProductSerializer
@@ -37,3 +38,13 @@ class ProductDetailView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
 
 
+@api_view(['GET'])
+def get_min_max_sum(request):
+    '''
+    Операции выполняются по обычной, а не скидочной цене
+    '''
+    min_price = Products.objects.aggregate(min=Min('price'))['min']
+    max_price = Products.objects.aggregate(max=Max('price'))['max']
+    balance_sum = Products.objects.aggregate(sum=Sum(F('price') * F('product_balance')))['sum']
+
+    return Response({'min': min_price, 'max': max_price, 'sum': balance_sum})

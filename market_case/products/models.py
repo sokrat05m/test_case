@@ -28,8 +28,8 @@ class Subcategory(models.Model):
 
 class Products(models.Model):
     product_name = models.CharField(max_length=255, verbose_name='Название товара')
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена товара')
-    discount_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена со скидкой')
+    price = models.IntegerField(verbose_name='Цена товара')
+    discount_price = models.IntegerField(verbose_name='Цена со скидкой')
     product_balance = models.IntegerField()
     product_characteristics = models.TextField()
     product_category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
