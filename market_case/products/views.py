@@ -1,6 +1,6 @@
 from django.db.models import Q, Min, Sum, Max, F
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -11,6 +11,7 @@ from .serializers import ProductSerializer, CategorySerializer
 
 # Create your views here.
 class ProductsAPIListPagination(PageNumberPagination):
+    page_size = 3
     page_query_param = 'page_size'
     max_page_size = 100
 
@@ -45,4 +46,4 @@ def get_min_max_sum(request):
     total = Products.objects.aggregate(min=Min('price'), max=Max('price'),
                                        sum=Sum(F('price') * F('product_balance')))
 
-    return Response({'min': total['min'], 'max': total['max'], 'sum': total['sum']})
+    return Response({'min': total['min'], 'max': total['max'], 'sum': total['sum']}, status=status.HTTP_200_OK)
