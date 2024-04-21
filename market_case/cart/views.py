@@ -5,7 +5,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from cart.models import Cart, CartItem
-from cart.serializers import CartSerializer
+from cart.serializers import CartSerializer, CartItemSerializer
 from products.models import Products
 
 
@@ -20,7 +20,6 @@ def add_cart(request):
         cart = user.cart
     except Cart.DoesNotExist:
         cart = Cart.objects.create(user=user)
-
     product = Products.objects.get(pk=product_id)
 
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)

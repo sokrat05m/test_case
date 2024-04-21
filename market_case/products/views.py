@@ -5,19 +5,18 @@ from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from .models import Products
-from .serializers import ProductSerializer
+from .models import Products, Category
+from .serializers import ProductSerializer, CategorySerializer
 
 
 # Create your views here.
 class ProductsAPIListPagination(PageNumberPagination):
-    page_size = 3
     page_query_param = 'page_size'
     max_page_size = 100
 
 
 class ProductsAPIList(generics.ListAPIView):
-    queryset = Products.objects.all().select_related()
+    queryset = Products.objects.all()
     serializer_class = ProductSerializer
     pagination_class = ProductsAPIListPagination
 
