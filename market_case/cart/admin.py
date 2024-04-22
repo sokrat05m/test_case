@@ -7,11 +7,11 @@ from cart.models import Cart, CartItem
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    fields = ['user']
-    list_display = ['user']
+    fields = ['id', 'user']
+    list_display = ['id', 'user']
 
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
-    fields = ['product', 'quantity', 'cart']
-    list_display = ['product', 'quantity', 'cart']
+    fields = ['id', 'product', 'quantity', 'cart']
+    list_display = ['id', 'product', 'quantity', 'cart']

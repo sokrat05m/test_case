@@ -23,7 +23,6 @@ class CartTest(APITestCase):
 
         user_1 = User.objects.create_user(username='testuser', password='12345')
         cart_1 = Cart.objects.create(user=user_1)
-        # cart_item_1 = CartItem.objects.create(cart=cart_1, product=product_1, quantity=3)
         url = reverse('cart:add_cart')
         self.client.force_login(user_1)
         res = self.client.post(url, data={"product_id": 1, "quantity": 3}, format='json')
