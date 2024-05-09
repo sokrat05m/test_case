@@ -26,7 +26,7 @@ class Subcategory(models.Model):
         return self.subcategory_name
 
 
-class Products(models.Model):
+class Product(models.Model):
     product_name = models.CharField(max_length=255, verbose_name='Название товара')
     price = models.IntegerField(verbose_name='Цена товара')
     discount_price = models.IntegerField(verbose_name='Цена со скидкой')

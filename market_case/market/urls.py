@@ -26,6 +26,7 @@ urlpatterns = [
     path('silk/', include('silk.urls', namespace='silk')),
     path('admin/', admin.site.urls),
     path('api/v1/', include('products.urls', namespace='products')),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/v1/auth/', include('rest_framework.urls')),
     path('api/v1/cart/', include('cart.urls', namespace='cart')),

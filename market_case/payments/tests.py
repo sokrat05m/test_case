@@ -26,19 +26,18 @@ class PaymentsTest(APITestCase):
 
     # def test_check_item_quantity(self):
     #     url = reverse('payments:payment')
-    #     category_1 = Category.objects.create(category_name='Автомобили')
-    #     sub_category_1 = Subcategory.objects.create(subcategory_name='Седаны',
-    #                                                 parent=category_1)
-    #     product_1 = Products.objects.create(product_name='Тойота Камри',
+    #     category_2 = Category.objects.create(category_name='Автомобили')
+    #     sub_category_2 = Subcategory.objects.create(subcategory_name='Седаны',
+    #                                                 parent=category_2)
+    #     product_2 = Products.objects.create(product_name='Тойота Камри',
     #                                         price=6000, discount_price=5000,
     #                                         product_balance=7, product_characteristics='Камри',
-    #                                         product_category=category_1, product_subcategory=sub_category_1)
+    #                                         product_category=category_2, product_subcategory=sub_category_2)
     #
-    #     user_1 = User.objects.create_user(username='testuser', password='12345', email='test@mail.ru')
-    #     print(user_1.id)
-    #     cart_1 = Cart.objects.create(user=user_1)
-    #     print(user_1.cart.id)
-    #     cart_items = CartItem.objects.create(cart=cart_1, product=product_1, quantity=10)
-    #     self.client.force_login(user_1)
+    #     user_2 = User.objects.create_user(username='testuser', password='12345', email='test@mail.ru')
+    #     cart_2 = Cart.objects.create(user=user_2)
+    #     cart_items = CartItem.objects.create(cart=cart_2, product=product_2, quantity=10)
+    #     self.client.force_login(user_2)
     #     res = self.client.get(url)
-    #     self.assertEqual({'message': 'Продукта Тойота Камри нет в таком количестве'}, res.data)
+    #     self.assertEqual(status.HTTP_200_OK, res.status_code)
+    #     # self.assertEqual({'message': 'Продукта Тойота Камри нет в таком количестве'}, res.data)

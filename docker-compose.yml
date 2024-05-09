@@ -7,6 +7,9 @@ services:
       - "465:465"
       - "80:80"
 
+    restart:
+      always
+
     volumes:
       - ./market_case:/market_case
 
@@ -27,7 +30,7 @@ services:
 
 
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "poetry run python manage.py runserver 0.0.0.0:8000"
 
     depends_on:
       - database
@@ -38,6 +41,8 @@ services:
       - POSTGRES_DB=db_name
       - POSTGRES_USER=db_user
       - POSTGRES_PASSWORD=123456
+
+
 
     volumes:
       - postgres_data:/var/lib/postgresql/data

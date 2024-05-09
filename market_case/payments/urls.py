@@ -5,5 +5,5 @@ from payments import views
 app_name = 'payments'
 
 urlpatterns = [
-    path('', views.send_mail_test, name='payment'),
+    path('', views.send_order_detail_mail, name='payment'),
 ]

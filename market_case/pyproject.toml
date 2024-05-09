@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "a test case for mediann-dev"
+version = "0.1.0"
+description = ""
+authors = ["Sokrat Magomedov <oooosokrat@mail.ru >"]
+readme = "README.md"
+packages = [{include = "a test case for mediann"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "^5.0.4"
+djangorestframework = "^3.15.1"
+psycopg2 = "^2.9.9"
+drf-spectacular = "^0.27.0"
+requests = "^2.31.0"
+django-silk = "^5.1.0"
+coverage = "^7.4.4"
+celery = [
+    { version = "^5.4.0" },
+    { version = "^5.4.0", extras = ["redis"], optional = true },
+]
+flower = "^2.0.1"
+redis = "^5.0.4"
+
+[tool.poetry.extras]
+redis = ["redis"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
