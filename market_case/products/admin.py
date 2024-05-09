@@ -17,7 +17,17 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductsAdmin(admin.ModelAdmin):
-    fields = ['product_name', 'price', 'discount_price', 'product_balance',
-              'product_characteristics', 'product_category', 'product_subcategory']
-    list_display = ['product_name', 'price', 'discount_price', 'product_balance',
-                    'product_characteristics', 'product_category', 'product_subcategory']
+    fields = ['product_name',
+              'price',
+              'discount_price',
+              'product_balance',
+              'product_characteristics',
+              'product_category',
+              'product_subcategory']
+    list_display = ['product_name',
+                    'price',
+                    'discount_price',
+                    'product_balance',
+                    'product_characteristics',
+                    'product_category',
+                    'product_subcategory']

@@ -27,13 +27,18 @@ class Subcategory(models.Model):
 
 
 class Product(models.Model):
-    product_name = models.CharField(max_length=255, verbose_name='Название товара')
+    product_name = models.CharField(max_length=255,
+                                    verbose_name='Название товара')
     price = models.IntegerField(verbose_name='Цена товара')
     discount_price = models.IntegerField(verbose_name='Цена со скидкой')
     product_balance = models.IntegerField()
     product_characteristics = models.TextField()
-    product_category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    product_subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, null=True)
+    product_category = models.ForeignKey(Category,
+                                         on_delete=models.CASCADE,
+                                         null=True)
+    product_subcategory = models.ForeignKey(Subcategory,
+                                            on_delete=models.CASCADE,
+                                            null=True)
 
     class Meta:
         verbose_name = 'Product'

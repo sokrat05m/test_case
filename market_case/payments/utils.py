@@ -6,8 +6,9 @@ from cart.models import Cart
 
 def get_payment_link(cart: Cart, email: str) -> dict:
     url = 'http://test-payments.mediann-dev.ru/payment'
-    query = cart.items.aggregate(sum=Sum(F('quantity') * F('product__discount_price')),
-                                 quantity=Sum('quantity'))
+    query = cart.items.aggregate(
+        sum=Sum(F('quantity') * F('product__discount_price')),
+        quantity=Sum('quantity'))
 
     data = {
         'amount': query['sum'],
@@ -21,7 +22,8 @@ def get_payment_link(cart: Cart, email: str) -> dict:
 
 def check_item_quantity(cart: Cart) -> None | str:
     """
-    Проверка перед заказом, не превышает ли количество товара в заказе его остаток на складе
+    Проверка перед заказом,
+    не превышает ли количество товара в заказе его остаток на складе
     """
     items = cart.items.all().select_related('product')
     for item in items:

@@ -17,18 +17,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import (
-    SpectacularAPIView,
     SpectacularSwaggerView,
     SpectacularRedocView
 )
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('silk/', include('silk.urls', namespace='silk')),
     path('admin/', admin.site.urls),
     path('api/v1/', include('products.urls', namespace='products')),
-    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/',
+         SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('api/schema/swagger-ui/',
+         SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/v1/auth/', include('rest_framework.urls')),
     path('api/v1/cart/', include('cart.urls', namespace='cart')),
     path('api/v1/payments/', include('payments.urls', namespace='payments'))
 ]
+
+urlpatterns += staticfiles_urlpatterns()

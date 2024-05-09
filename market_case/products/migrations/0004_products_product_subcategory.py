@@ -14,6 +14,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='products',
             name='product_subcategory',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='products.subcategory'),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to='products.subcategory'),
         ),
     ]

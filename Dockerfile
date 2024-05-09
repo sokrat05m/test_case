@@ -22,3 +22,4 @@ RUN apk add postgresql-client build-base postgresql-dev
 RUN poetry install
 RUN adduser --disabled-password sokrat
 USER sokrat
+

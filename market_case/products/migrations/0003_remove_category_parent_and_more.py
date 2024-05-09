@@ -18,14 +18,26 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='products',
             name='product_category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='products.category'),
+            field=models.ForeignKey
+            (null=True,
+             on_delete=django.db.models.deletion.CASCADE,
+             to='products.category'),
         ),
         migrations.CreateModel(
             name='Subcategory',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
                 ('subcategory_name', models.CharField(max_length=255)),
-                ('parent', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='products.category')),
+                ('parent', models.ForeignKey(
+                    null=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='products.category')
+                 ),
             ],
             options={
                 'verbose_name': 'Subcategory',

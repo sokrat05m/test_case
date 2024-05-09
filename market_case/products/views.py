@@ -23,7 +23,6 @@ class ProductsAPIList(generics.ListAPIView):
     pagination_class = ProductsAPIListPagination
 
 
-# TODO: проверить тип кверисета
 class ProductListByCategoryAPIView(generics.ListAPIView):
     serializer_class = ProductSerializer
 
@@ -32,6 +31,7 @@ class ProductListByCategoryAPIView(generics.ListAPIView):
         queryset = Product.objects.filter(
             Q(product_category_id=category_id) |
             Q(product_subcategory__parent_id=category_id)).select_related()
+        print(type(queryset))
         return queryset
 
 
@@ -41,11 +41,16 @@ class ProductDetailView(generics.RetrieveAPIView):
 
 
 @api_view(['GET'])
-def get_min_max_sum_price(request: Request):
-    '''
+def get_min_max_sum_price(request: Request) -> Response:
+    """
     Операции выполняются по обычной, а не скидочной цене
-    '''
-    query = Product.objects.aggregate(min=Min('price'), max=Max('price'),
-                                       sum=Sum(F('price') * F('product_balance')))
+    """
+    query = Product.objects.aggregate(
+        min=Min('price'), max=Max('price'),
+        sum=Sum(F('price') * F('product_balance'))
+    )
 
-    return Response({'min': query['min'], 'max': query['max'], 'sum': query['sum']}, status=status.HTTP_200_OK)
+    return Response(
+        {'min': query['min'], 'max': query['max'],
+         'sum': query['sum']}, status=status.HTTP_200_OK
+    )

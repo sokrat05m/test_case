@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,21 +14,51 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('category_name', models.CharField(max_length=255)),
-                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='subcategories', to='products.category')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
+                ('category_name', models.CharField(
+                    max_length=255)
+                 ),
+                ('parent', models.ForeignKey(
+                    blank=True, null=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='subcategories', to='products.category')
+                 ),
             ],
         ),
         migrations.CreateModel(
             name='Products',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('product_name', models.CharField(max_length=255, verbose_name='Название товара')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Цена товара')),
-                ('discount_price', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Цена со скидкой')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
+                ('product_name', models.CharField(
+                    max_length=255,
+                    verbose_name='Название товара')
+                 ),
+                ('price', models.DecimalField(
+                    decimal_places=2,
+                    max_digits=10,
+                    verbose_name='Цена товара')
+                 ),
+                (
+                    'discount_price', models.DecimalField(
+                        decimal_places=2,
+                        max_digits=10,
+                        verbose_name='Цена со скидкой')
+                ),
                 ('product_balance', models.IntegerField()),
                 ('product_characteristics', models.TextField()),
-                ('product_category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.category')),
+                ('product_category',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                   to='products.category')),
             ],
         ),
     ]

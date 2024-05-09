@@ -11,8 +11,3 @@ app.conf.broker_url = settings.CELERY_BROKER_URL
 app.conf.task_serializer = 'json'
 app.conf.result_backend = 'rpc://'
 app.autodiscover_tasks()
-
-
-
-
-

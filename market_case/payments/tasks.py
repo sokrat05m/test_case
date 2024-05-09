@@ -6,7 +6,7 @@ from payments.utils import check_item_quantity, get_payment_link, clear_cart
 
 
 @app.task()
-def send_order_mail_task(cart_id: int, email) -> str:
+def send_order_mail_task(cart_id: int, email: str) -> str:
     print(email)
     cart = Cart.objects.get(id=cart_id)
     check = check_item_quantity(cart)
@@ -15,7 +15,8 @@ def send_order_mail_task(cart_id: int, email) -> str:
     if cart.items.exists():
         response = get_payment_link(cart, email)
         subject = "Оплата"
-        message = f"Ссылка: {response['url']}, номер заказа: {response['orderId']}"
+        message = (f"Ссылка: {response['url']}, "
+                   f"номер заказа: {response['orderId']}")
         recipient_list = [email]
         try:
             send_mail(subject=subject,
