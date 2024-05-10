@@ -30,13 +30,13 @@ class ProductListByCategoryAPIView(generics.ListAPIView):
         category_id = self.kwargs['category_id']
         queryset = Product.objects.filter(
             Q(product_category_id=category_id) |
-            Q(product_subcategory__parent_id=category_id)).select_related()
+            Q(product_subcategory__parent_id=category_id)).select_related('subcategory')
         print(type(queryset))
         return queryset
 
 
 class ProductDetailView(generics.RetrieveAPIView):
-    queryset = Product.objects.all().select_related()
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 

@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import (
     SpectacularSwaggerView,
-    SpectacularRedocView
+    SpectacularRedocView, SpectacularAPIView
 )
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -26,6 +26,7 @@ urlpatterns = [
     path('silk/', include('silk.urls', namespace='silk')),
     path('admin/', admin.site.urls),
     path('api/v1/', include('products.urls', namespace='products')),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/redoc/',
          SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('api/schema/swagger-ui/',
