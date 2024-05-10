@@ -13,10 +13,15 @@ from .utils import check_item_quantity, clear_cart
 def send_order_detail_mail(request: Request) -> Response:
     email = request.user.email
     cart = request.user.cart
-    check = check_item_quantity(cart)
-    if check:
+    missing_items = check_item_quantity(cart)
+    if len(missing_items) > 1:
         return Response(
-            {'message': f"Продукта '{check}' нет в таком количестве"}
+            {'message': f"Продуктов {", ".join(missing_items)} нет в таком количестве"}
+        )
+
+    if len(missing_items) == 1:
+        return Response(
+            {'message': f"Продукта '{missing_items[0]}' нет в таком количестве"}
         )
 
     if cart.items.exists():

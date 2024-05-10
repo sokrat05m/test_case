@@ -20,17 +20,18 @@ def get_payment_link(cart: Cart, email: str) -> dict:
     return response.json()
 
 
-def check_item_quantity(cart: Cart) -> None | str:
+def check_item_quantity(cart: Cart) -> list:
     """
     Проверка перед заказом,
     не превышает ли количество товара в заказе его остаток на складе
     """
     items = cart.items.all().select_related('product')
-
+    missing_items = []
     for item in items:
         if item.quantity > item.product.product_balance:
-            return item.product.product_name
-    return None
+            missing_items.append(f"'{item.product.product_name}'")
+
+    return missing_items
 
 
 def clear_cart(cart: Cart):
