@@ -30,7 +30,7 @@ services:
 
 
     command: >
-      sh -c "poetry run gunicorn market.wsgi:application --bind 0.0.0.0:8000"
+      sh -c "python manage.py runserver 0.0.0.0:8000"
 
     depends_on:
       - database

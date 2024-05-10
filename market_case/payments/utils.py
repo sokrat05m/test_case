@@ -26,6 +26,7 @@ def check_item_quantity(cart: Cart) -> None | str:
     не превышает ли количество товара в заказе его остаток на складе
     """
     items = cart.items.all().select_related('product')
+
     for item in items:
         if item.quantity > item.product.product_balance:
             return item.product.product_name
