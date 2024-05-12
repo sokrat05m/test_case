@@ -5,7 +5,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from .tasks import send_order_mail_task
-from .utils import check_item_quantity, clear_cart
+from .utils import clear_cart, generate_missing_items_message
 
 
 @api_view(['GET'])
@@ -13,9 +13,9 @@ from .utils import check_item_quantity, clear_cart
 def send_order_detail_mail(request: Request) -> Response:
     email = request.user.email
     cart = request.user.cart
-    check_items = check_item_quantity(cart)
-    if check_items:
-        return Response({'message': check_items})
+    is_missing = generate_missing_items_message(cart)
+    if is_missing:
+        return Response({'message': is_missing})
     if cart.items.exists():
         result = send_order_mail_task.delay(cart.id, email).get()
         if result == 'Письмо успешно отправлено':
