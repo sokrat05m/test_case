@@ -2,7 +2,7 @@ from django.core.mail import send_mail
 
 from cart.models import Cart
 from celery_app import app
-from payments.utils import get_payment_link, clear_cart
+from payments.utils import get_payment_link
 
 
 @app.task()

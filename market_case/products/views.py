@@ -30,8 +30,7 @@ class ProductListByCategoryAPIView(generics.ListAPIView):
         category_id = self.kwargs['category_id']
         queryset = Product.objects.filter(
             Q(product_category_id=category_id) |
-            Q(product_subcategory__parent_id=category_id)).select_related('subcategory')
-        print(type(queryset))
+            Q(product_subcategory__parent_id=category_id)).select_related('product_subcategory')
         return queryset
 
 
@@ -42,9 +41,6 @@ class ProductDetailView(generics.RetrieveAPIView):
 
 @api_view(['GET'])
 def get_min_max_sum_price(request: Request) -> Response:
-    """
-    Операции выполняются по обычной, а не скидочной цене
-    """
     query = Product.objects.aggregate(
         min=Min('price'), max=Max('price'),
         sum=Sum(F('price') * F('product_balance'))

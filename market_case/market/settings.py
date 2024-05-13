@@ -170,3 +170,16 @@ SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
+
+LOGGING = {
+        'version': 1,
+        'handlers': {
+            'console': {'class': 'logging.StreamHandler'}
+        },
+        'loggers': {
+            'django.db.backends': {
+                'handlers': ['console'],
+                'level': 'DEBUG'
+            }
+        }
+    }
